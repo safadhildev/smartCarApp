@@ -140,7 +140,9 @@ const Home = () => {
             {/* <PhoneIcon width={10} height={10} /> */}
             {_renderOptionIcon(index)}
           </View>
-          <Text style={styles.cardText}>{item.title}</Text>
+          <Text allowFontScaling={false} style={styles.cardText}>
+            {item.title}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -191,8 +193,12 @@ const Home = () => {
     <View style={styles.root}>
       <View style={styles.headerContainer}>
         <View style={styles.headerWrapper}>
-          <Text style={styles.title}>Hello Faris</Text>
-          <Text style={styles.subtitle}>Have a nice drive</Text>
+          <Text allowFontScaling={false} style={styles.title}>
+            Hello Faris
+          </Text>
+          <Text allowFontScaling={false} style={styles.subtitle}>
+            Have a nice drive
+          </Text>
         </View>
         <View style={styles.logoWrapper}>
           <Image
@@ -227,6 +233,7 @@ const Home = () => {
             }),
           }}>
           <Text
+            allowFontScaling={false}
             style={{
               color: '#000',
               fontSize: 18,
@@ -240,6 +247,7 @@ const Home = () => {
             {myCars[selectedCar].plate}
           </Text>
           <Text
+            allowFontScaling={false}
             style={{
               color: '#000',
               fontWeight: 'normal',
@@ -249,6 +257,7 @@ const Home = () => {
             {myCars[selectedCar].model}
           </Text>
           <Text
+            allowFontScaling={false}
             style={{
               color: myCars[selectedCar].connected ? '#66BB6A' : '#F57C00',
               fontWeight: 'normal',
@@ -293,6 +302,7 @@ const Home = () => {
               marginBottom: 50,
             }}>
             <Text
+              allowFontScaling={false}
               style={{
                 color: '#FFF',
                 fontFamily: Fonts.MontserratRegular,

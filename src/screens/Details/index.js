@@ -177,6 +177,7 @@ const Details = () => {
           borderRadius: 10,
         }}>
         <Animatable.Text
+          allowFontScaling={false}
           animation={cIndex === 0 ? 'slideInRight' : 'slideInLeft'}
           style={styles.labelText}>
           {title}
@@ -187,11 +188,13 @@ const Details = () => {
           {_renderProgress(remainingKpa, totalKpa)}
         </Animatable.View>
         <Animatable.Text
+          allowFontScaling={false}
           animation={cIndex === 0 ? 'slideInRight' : 'slideInLeft'}
           style={styles.text}>
           {remainingKpa} / {totalKpa} Kpa
         </Animatable.Text>
         <Animatable.Text
+          allowFontScaling={false}
           animation={cIndex === 0 ? 'slideInRight' : 'slideInLeft'}
           style={styles.text}>
           {remainingPsi} / {totalPsi} Psi
@@ -213,9 +216,15 @@ const Details = () => {
                 opacity: animationSeq == 0 ? 0 : 1,
               }}>
               <Animatable.View animation={cIndex === 0 && 'slideInRight'}>
-                <Text style={styles.labelText}>Tyre Details</Text>
-                <Text style={styles.text}>Wheel Size: {item.wheelSize}</Text>
-                <Text style={styles.text}>Tyre Size: {item.tyreSize}</Text>
+                <Text allowFontScaling={false} style={styles.labelText}>
+                  Tyre Details
+                </Text>
+                <Text allowFontScaling={false} style={styles.text}>
+                  Wheel Size: {item.wheelSize}
+                </Text>
+                <Text allowFontScaling={false} style={styles.text}>
+                  Tyre Size: {item.tyreSize}
+                </Text>
               </Animatable.View>
               <View style={{marginTop: 20}}>
                 {_renderCard({
@@ -247,7 +256,9 @@ const Details = () => {
                   fill="#BDBDBD"
                   style={{transform: [{rotate: '180deg'}], marginRight: 5}}
                 />
-                <Text style={[styles.swipeText]}>Swipe for right side</Text>
+                <Text allowFontScaling={false} style={[styles.swipeText]}>
+                  Swipe for right side
+                </Text>
               </Animatable.View>
             </Animatable.View>
             <Animatable.View
@@ -297,9 +308,15 @@ const Details = () => {
                 right: 0,
               }}>
               <Animatable.View animation={cIndex === 1 && 'slideInLeft'}>
-                <Text style={styles.labelText}>Tyre Details</Text>
-                <Text style={styles.text}>Wheel Size: {item.wheelSize}</Text>
-                <Text style={styles.text}>Tyre Size: {item.tyreSize}</Text>
+                <Text allowFontScaling={false} style={styles.labelText}>
+                  Tyre Details
+                </Text>
+                <Text allowFontScaling={false} style={styles.text}>
+                  Wheel Size: {item.wheelSize}
+                </Text>
+                <Text allowFontScaling={false} style={styles.text}>
+                  Tyre Size: {item.tyreSize}
+                </Text>
               </Animatable.View>
               <View style={{marginTop: 20}}>
                 {_renderCard({
@@ -326,7 +343,9 @@ const Details = () => {
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}>
-                <Text style={[styles.swipeText]}>Swipe for left side</Text>
+                <Text allowFontScaling={false} style={[styles.swipeText]}>
+                  Swipe for left side
+                </Text>
                 <SvgXml
                   xml={ChevronIcon}
                   fill="#BDBDBD"
@@ -375,6 +394,7 @@ const Details = () => {
           <SvgXml xml={BackIcon} />
         </TouchableOpacity>
         <Animatable.Text
+          allowFontScaling={false}
           animation={animationSeq === 1 && 'fadeIn'}
           style={{
             position: 'absolute',
