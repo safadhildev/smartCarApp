@@ -65,19 +65,34 @@ const styles = StyleSheet.create({
   labelText: {
     fontFamily: Fonts.MontserratBold,
     color: '#757575',
-    fontSize: 14,
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontSize: 14,
+      },
+    }),
   },
   text: {
     fontFamily: Fonts.MontserratSemiBold,
     color: '#424242',
-    fontSize: 18,
+    fontSize: 14,
     marginVertical: 0,
     marginTop: 5,
+    ...Platform.select({
+      ios: {
+        fontSize: 18,
+      },
+    }),
   },
   swipeText: {
     fontFamily: Fonts.MontserratSemiBold,
     color: '#BDBDBD',
-    fontSize: 18,
+    fontSize: 16,
+    ...Platform.select({
+      ios: {
+        fontSize: 18,
+      },
+    }),
   },
 });
 
@@ -86,18 +101,18 @@ const slideOut = {
     translateX: 0,
   },
   to: {
-    translateX: Platform.OS === 'ios' ? 205 : 195,
+    translateX: Platform.OS === 'ios' ? 205 : 180,
   },
 };
 
 const fadeOut = {
   from: {
     opacity: 1,
-    translateX: Platform.OS === 'ios' ? 205 : 200,
+    translateX: Platform.OS === 'ios' ? 205 : 180,
   },
   to: {
     opacity: 0,
-    translateX: Platform.OS === 'ios' ? 205 : 200,
+    translateX: Platform.OS === 'ios' ? 205 : 180,
   },
 };
 
@@ -170,11 +185,12 @@ const Details = () => {
     return (
       <View
         style={{
-          width: 240,
-          marginTop: 30,
+          width: width - 160,
+          marginTop: 20,
           padding: 15,
           backgroundColor: '#FFF',
           borderRadius: 10,
+          ...Platform.select({ios: {marginTop: 30}}),
         }}>
         <Animatable.Text
           allowFontScaling={false}
@@ -247,9 +263,12 @@ const Details = () => {
               <Animatable.View
                 animation={cIndex === 0 && 'slideInRight'}
                 style={{
-                  marginTop: 100,
+                  marginTop: 70,
                   flexDirection: 'row',
                   alignItems: 'center',
+                  ...Platform.select({
+                    ios: {marginTop: 100},
+                  }),
                 }}>
                 <SvgXml
                   xml={ChevronIcon}
@@ -294,7 +313,7 @@ const Details = () => {
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
-                left: -200,
+                left: -210,
               }}>
               <Image
                 source={carRedTop}
@@ -339,9 +358,14 @@ const Details = () => {
               <Animatable.View
                 animation={cIndex === 1 && 'slideInLeft'}
                 style={{
-                  marginTop: 100,
+                  marginTop: 70,
                   flexDirection: 'row',
                   alignItems: 'center',
+                  ...Platform.select({
+                    ios: {
+                      marginTop: 100,
+                    },
+                  }),
                 }}>
                 <Text allowFontScaling={false} style={[styles.swipeText]}>
                   Swipe for left side
@@ -400,9 +424,12 @@ const Details = () => {
             position: 'absolute',
             marginTop: 50,
             marginHorizontal: 20,
-            fontSize: 32,
+            fontSize: 28,
             fontFamily: Fonts.MontserratBold,
             opacity: animationSeq === 1 ? 1 : 0,
+            ...Platform.select({
+              ios: {fontSize: 32},
+            }),
           }}>
           Tyre Air Pressure
         </Animatable.Text>
@@ -413,7 +440,7 @@ const Details = () => {
           sliderWidth={width}
           itemWidth={width}
           onSnapToItem={_onSnapToItem}
-          inactiveSlideOpacity={1}
+          inactiveSlideOpacity={0}
           inactiveSlideScale={1}
           onBeforeSnapToItem={_onBeforeSnapToItem}
           containerCustomStyle={{paddingVertical: 50, marginTop: 30}}

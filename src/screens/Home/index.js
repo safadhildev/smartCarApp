@@ -113,6 +113,8 @@ const Home = () => {
     setSelectedCar(index);
   };
 
+  console.log({width});
+
   const _renderOptionIcon = index => {
     switch (index) {
       case 0:
@@ -159,7 +161,7 @@ const Home = () => {
           style={
             index === 0
               ? {
-                  height: 270,
+                  height: 250,
                   marginRight: -120,
                   ...Platform.select({
                     ios: {
@@ -168,7 +170,7 @@ const Home = () => {
                   }),
                 }
               : {
-                  height: 210,
+                  height: 200,
                   marginRight: -120,
                   marginBottom: index > 0 && 30,
                   ...Platform.select({

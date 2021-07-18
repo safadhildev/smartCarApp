@@ -1,6 +1,8 @@
 import React from 'react';
-import {Platform, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {Fonts} from '../../common';
+
+const {width} = Dimensions.get('window');
 
 const shadow = {
   shadowColor: '#000',
@@ -33,21 +35,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     color: '#000',
     fontFamily: Fonts.MontserratBold,
+    ...Platform.select({
+      ios: {fontSize: 32},
+    }),
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: Fonts.MontserratLight,
     color: '#9E9E9E',
+    ...Platform.select({
+      ios: {fontSize: 20},
+    }),
   },
   logoWrapper: {
     width: 60,
     height: 60,
   },
   cardContainer: {
-    width: 170,
+    width: (width - 50) / 2,
     height: 80,
     borderRadius: 10,
     backgroundColor: '#FFF',
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.MontserratRegular,
     ...Platform.select({
       ios: {fontSize: 17},
-      android: {fontSize: 15},
+      android: {fontSize: 14},
     }),
   },
 });
