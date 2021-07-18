@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {Fonts} from '../../common';
 
 const shadow = {
@@ -17,8 +17,18 @@ const shadow = {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    paddingBottom: 60,
+    ...Platform.select({ios: {paddingBottom: 40}}),
   },
-  headerContainer: {padding: 20, flexDirection: 'row'},
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 20,
+    flexDirection: 'row',
+    ...Platform.select({
+      ios: {paddingTop: 10, paddingBottom: 10},
+    }),
+  },
   headerWrapper: {
     flex: 1,
   },
@@ -37,17 +47,26 @@ const styles = StyleSheet.create({
     height: 60,
   },
   cardContainer: {
-    width: 180,
-    height: 90,
+    width: 170,
+    height: 80,
     borderRadius: 10,
     backgroundColor: '#FFF',
     marginVertical: 5,
     padding: 15,
     ...shadow,
+    ...Platform.select({
+      ios: {
+        width: 180,
+        height: 90,
+      },
+    }),
   },
   cardText: {
-    fontSize: 17,
     fontFamily: Fonts.MontserratRegular,
+    ...Platform.select({
+      ios: {fontSize: 17},
+      android: {fontSize: 15},
+    }),
   },
 });
 

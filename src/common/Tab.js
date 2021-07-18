@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Platform,
 } from 'react-native';
 import Svg, {Line} from 'react-native-svg';
 import {Fonts} from '.';
@@ -15,14 +16,18 @@ const styles = StyleSheet.create({
   },
   background: {
     position: 'absolute',
-    height: 80,
+    height: 30,
     right: 0,
     left: 0,
     zIndex: 1,
     bottom: -45,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#000',
+    ...Platform.select({
+      ios: {
+        height: 80,
+      },
+    }),
   },
   shape: {
     display: 'flex',
@@ -37,13 +42,18 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#000',
     position: 'absolute',
-    height: 95,
+    height: 80,
     right: 0,
     zIndex: 2,
     bottom: 0,
     left: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    ...Platform.select({
+      ios: {
+        height: 95,
+      },
+    }),
   },
   leftNav: {
     flex: 1,
@@ -87,12 +97,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: '50%',
     alignSelf: 'center',
-  },
-  centerActive: {
-    width: 50,
-    height: 5,
-    backgroundColor: '#000',
-    borderRadius: 5,
   },
 });
 
@@ -139,8 +143,13 @@ const Tab = ({state, descriptors, navigation}) => {
                 borderRadius: 10,
                 backgroundColor: '#C62828',
                 left: -155,
-                top: 11,
+                top: 21,
                 transform: [{rotate: '-10deg'}],
+                ...Platform.select({
+                  ios: {
+                    top: 11,
+                  },
+                }),
               }}></View>
           )}
           {state?.index === 1 && (
@@ -152,6 +161,11 @@ const Tab = ({state, descriptors, navigation}) => {
                 height: 4,
                 borderRadius: 10,
                 backgroundColor: '#C62828',
+                ...Platform.select({
+                  android: {
+                    top: 10,
+                  },
+                }),
               }}></View>
           )}
           {state?.index === 2 && (
@@ -163,8 +177,13 @@ const Tab = ({state, descriptors, navigation}) => {
                 borderRadius: 10,
                 backgroundColor: '#C62828',
                 left: 105,
-                top: 10,
+                top: 21,
                 transform: [{rotate: '10deg'}],
+                ...Platform.select({
+                  ios: {
+                    top: 10,
+                  },
+                }),
               }}></View>
           )}
         </View>

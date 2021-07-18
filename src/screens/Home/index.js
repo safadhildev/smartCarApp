@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
+  Platform,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -19,6 +20,7 @@ import ChevronIcon from '../../../assets/chevron.svg';
 
 import {SvgXml} from 'react-native-svg';
 import {State} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/core';
 
 const logo = require('../../../assets/car_logo.png');
 
@@ -28,18 +30,22 @@ const options = [
   {
     icon: PowerIcon,
     title: 'Start your engine',
+    screen: null,
   },
   {
     icon: ToolsIcon,
     title: 'Car inspection',
+    screen: 'Details',
   },
   {
     icon: ArticleIcon,
     title: 'Documentation',
+    screen: null,
   },
   {
     icon: PhoneIcon,
     title: 'Emergency',
+    screen: null,
   },
 ];
 
@@ -67,10 +73,22 @@ const myCars = [
 const Home = () => {
   const carouselRef = useRef();
   const animationRef = useRef();
+  const navigation = useNavigation();
   const [selectedCar, setSelectedCar] = useState(0);
 
   const _onPressOption = item => {
-    Alert.alert(item.title);
+    const {screen} = item;
+    switch (screen) {
+      case 'Details':
+        navigation.navigate('Details', {data: item});
+        break;
+      default:
+        break;
+    }
+    if (item?.screen) {
+    } else {
+      Alert.alert(item.title);
+    }
   };
 
   const _onBeforeSnapToItem = () => {
@@ -133,18 +151,27 @@ const Home = () => {
       <View
         style={{
           flex: 1,
-          //   overflow: 'hidden',
-          // backgroundColor: '#000',
           justifyContent: 'flex-end',
         }}>
         <View
           style={
             index === 0
-              ? {height: 300, marginRight: -120}
+              ? {
+                  height: 270,
+                  marginRight: -120,
+                  ...Platform.select({
+                    ios: {
+                      height: 300,
+                    },
+                  }),
+                }
               : {
-                  height: 250,
+                  height: 210,
                   marginRight: -120,
                   marginBottom: index > 0 && 30,
+                  ...Platform.select({
+                    ios: {height: 250},
+                  }),
                 }
           }>
           <Image
@@ -159,12 +186,6 @@ const Home = () => {
       </View>
     );
   };
-
-  console.log(
-    `Selected: ${selectedCar} ::: total: ${myCars.length - 1} ::: show? ${
-      selectedCar <= myCars.length - 1
-    }`,
-  );
 
   return (
     <View style={styles.root}>
@@ -183,7 +204,7 @@ const Home = () => {
       <View
         style={{
           paddingHorizontal: 20,
-          marginTop: 10,
+          marginTop: '1%',
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
@@ -196,24 +217,44 @@ const Home = () => {
           animation="slideInLeft"
           delay={100}
           duration={500}
-          style={{position: 'absolute', zIndex: 1, top: 40, left: 20}}>
+          style={{
+            position: 'absolute',
+            top: 20,
+            left: 20,
+            zIndex: 1,
+            ...Platform.select({
+              ios: {top: 40, left: 20},
+            }),
+          }}>
           <Text
             style={{
               color: '#000',
-              fontSize: 20,
+              fontSize: 18,
               fontFamily: Fonts.MontserratBold,
+              ...Platform.select({
+                ios: {
+                  fontSize: 20,
+                },
+              }),
             }}>
             {myCars[selectedCar].plate}
           </Text>
-          <Text style={{color: '#000', fontWeight: 'normal', fontSize: 18}}>
+          <Text
+            style={{
+              color: '#000',
+              fontWeight: 'normal',
+              fontSize: 16,
+              ...Platform.select({ios: {fontSize: 18}}),
+            }}>
             {myCars[selectedCar].model}
           </Text>
           <Text
             style={{
               color: myCars[selectedCar].connected ? '#66BB6A' : '#F57C00',
               fontWeight: 'normal',
-              fontSize: 14,
+              fontSize: 12,
               marginVertical: 5,
+              ...Platform.select({ios: {fontSize: 14}}),
             }}>
             {myCars[selectedCar].connected
               ? 'Connection successful'
@@ -229,6 +270,7 @@ const Home = () => {
           onSnapToItem={_onSnapToItem}
           inactiveSlideOpacity={0}
           onBeforeSnapToItem={_onBeforeSnapToItem}
+          lockScrollWhileSnapping
         />
       </View>
       <View

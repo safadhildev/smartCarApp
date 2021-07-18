@@ -3,14 +3,26 @@ import React from 'react';
 import Home from '../screens/Home';
 import Details from '../screens/Details';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+  TransitionSpecs,
+} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profile from '../screens/Profile';
 import About from '../screens/About';
 import Tab from '../common/Tab';
+import {FadeInFromBottomAndroidSpec} from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs';
+import {Platform} from 'react-native';
 
 const Stack = createStackNavigator();
 const TabNav = createBottomTabNavigator();
+
+const forFade = ({current}) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+});
 
 const HomeStack = () => {
   return (
@@ -20,7 +32,11 @@ const HomeStack = () => {
       }}
       initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        // options={{cardStyleInterpolator: forFade}}
+      />
     </Stack.Navigator>
   );
 };
@@ -54,7 +70,11 @@ const App = () => {
     <NavigationContainer>
       <TabNav.Navigator
         initialRouteName="Home"
-        sceneContainerStyle={{paddingTop: 50, paddingBottom: 80}}
+        sceneContainerStyle={{
+          ...Platform.select({
+            ios: {paddingTop: 50, paddingBottom: 50},
+          }),
+        }}
         tabBar={props => <Tab {...props} />}
         tabBarOptions={{
           activeBackgroundColor: '#000',
